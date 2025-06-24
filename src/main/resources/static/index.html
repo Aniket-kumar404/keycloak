@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8" />
+	<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<title>Spring Boot + Keycloak Demo</title>
+
+	<link rel="stylesheet" href="/webjars/bootstrap/css/bootstrap.min.css" />
+	<script src="/webjars/jquery/jquery.min.js"></script>
+	<script src="/webjars/bootstrap/js/bootstrap.min.js"></script>
+
+	<style>
+		body {
+			padding-top: 80px;
+			background-color: #f8f9fa;
+		}
+
+		.card {
+			border-radius: 16px;
+			box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.1);
+		}
+
+		.authenticated {
+			display: none;
+		}
+	</style>
+</head>
+
+<body>
+	<div class="container">
+		<div class="row justify-content-center">
+			<div class="col-md-8">
+				<div class="card p-4">
+					<h2 class="mb-4 text-center">🔐 Spring Boot + Keycloak Login</h2>
+
+					<div class="unauthenticated txt-center">
+						<p>You are not logged in.</p>
+						<a href="/oauth2/authorization/keycloak" class="btn btn-success">
+							Login with Keycloak
+						</a>
+					</div>
+
+					<div class="authenticated text-center">
+						  Logged in as: <strong id="user"></strong>
+						  <br>
+						 <a href="/logout" class="btn btn-danger">Logout</a>
+					</div>
+
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<script>
+		$.get("/user", function (data) {
+			$("#user").html(data.name);
+			$(".unauthenticated").hide();
+			$(".authenticated").show();
+		});
+	</script>
+</body>
+
+</html>
